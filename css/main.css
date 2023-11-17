@@ -1,0 +1,50 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    line-height: 1.45;
+}
+
+main {
+    display: grid;
+    height: 100%;
+    place-items: center;
+}
+
+fieldset {
+    padding: 2em;
+}
+
+legend {
+    font-size: 30px;
+}
+
+label {
+    font-size: 20px;
+}
+
+input {
+    border-radius: 5px;
+    height: 25px;
+}
+
+p {
+    margin: 0.75rem 0 0;
+}
+
+#idEye {
+    margin-left: -32px;
+    background-color: transparent;
+    border: 0;
+}
+
+#idMode {
+    position: fixed;
+    top: 80px;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    cursor: pointer;
+}

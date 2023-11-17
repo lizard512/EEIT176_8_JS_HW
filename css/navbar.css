@@ -1,0 +1,35 @@
+nav>ul {
+    background-color: rgb(230, 230, 230);
+    list-style: none;
+    /* 移除項目符號 */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 0;
+    /* 移除 <li> 之間的空隙 */
+}
+
+nav a {
+    color: inherit;
+    /* 移除超連結顏色 */
+    display: block;
+    /* 讓 <a> 填滿 <li> */
+    font-size: 1.2rem;
+    padding: 10px;
+    text-decoration: none;
+    /* 移除超連結底線 */
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav a:hover {
+    background-color: rgb(115, 115, 115);
+    color: white;
+}
+
+.current-page {
+    background-color: rgb(115, 115, 115);
+    color: white;
+}

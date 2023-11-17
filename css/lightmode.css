@@ -1,0 +1,22 @@
+main {
+    background-color: wheat;
+}
+
+fieldset {
+    background-color: cornsilk;
+    border: 2px solid black;
+}
+
+input {
+    border: 2px solid black;
+}
+
+p {
+    color: grey;
+}
+
+#idMode {
+    color: white;
+    background-color: black;
+    border: 0.25rem solid white;
+}

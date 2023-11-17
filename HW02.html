@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW2</title>
+</head>
+<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/lightmode.css">
+<link rel="stylesheet" href="css/darkmode.css" disabled=true>
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+<style>
+</style>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="HW01.html">HW01</a></li>
+            <li><a href="HW02.html" class="current-page">HW02</a></li>
+            <li><a href="#">HW03</a></li>
+            <li><a href="#">HW04</a></li>
+            <li><a href="#">HW05</a></li>
+            <li><a href="#">HWEX</a></li>
+        </ul>
+    </nav>
+    <main>
+        <button id="idMode" class="fa fa-moon-o"> Dark Mode</button>
+        <div>
+            <fieldset>
+                <legend>Form Check</legend>
+                <label>姓名：</label>
+                <input type="text" id="idName" size="20" />
+                <span id="idNameHint"></span>
+                <p>1. 不可空白 2. 至少2個字以上 3.必須全部為中文字</p>
+                <br>
+                <label>密碼：</label>
+                <input type="password" id="idPwd" size="20" />
+                <button id="idEye" class="fa fa-eye" aria-hidden="true" type="button"></button>
+                <span id="idPwdHint"></span>
+                <p>1. 不可空白&emsp;2. 至少6個字元以上<br>3. 必須包含英數字、特殊字元[!@#$%^&*]</p>
+                <br>
+                <label>日期：</label>
+                <input type="text" id="idDate" size="20" />
+                <span id="idDateHint"></span>
+                <p>格式：西元年/月/日(yyyy/mm/dd)</p>
+
+            </fieldset>
+        </div>
+    </main>
+</body>
+
+<script>
+    let name = document.getElementById("idName");
+    let pwd = document.getElementById("idPwd");
+    let date = document.getElementById("idDate");
+    let eye = document.getElementById("idEye");
+    let mode = document.getElementById("idMode");
+
+    function setHint(obj, hint, icon, content, color) {
+        hint.className = icon;
+        hint.innerHTML = content;
+        hint.style.color = color;
+        obj.style.borderColor = color;
+    }
+
+    function checkName() {
+        let nameVal = name.value;
+        let nameHint = document.getElementById
+            ("idNameHint");
+        nameHint.innerHTML = "";
+        name.style.borderColor = "black";
+        if (nameVal == "") {
+            setHint(name, nameHint, "fa fa-times-circle", "請輸入姓名", "red");
+        } else if (nameVal.match(/\s/g)) {
+            setHint(name, nameHint, "fa fa-times-circle", "請勿輸入空白", "red")
+        } else {
+            if (nameVal.match(/^[\u4e00-\u9fa5]+$/g)) {
+                if (nameVal.length >= 2) {
+                    setHint(name, nameHint, "fa fa-check-circle", "", "green")
+                } else {
+                    setHint(name, nameHint, "fa fa-times-circle", "好小", "red")
+                }
+            } else {
+                setHint(name, nameHint, "fa fa-times-circle", "姓名格式錯誤", "red")
+            }
+        }
+    }
+
+    function checkPwd() {
+        let pwdVal = pwd.value;
+        let pwdHint = document.getElementById
+            ("idPwdHint");
+        pwdHint.innerHTML = "";
+        if (pwdVal == "") {
+            setHint(pwd, pwdHint, "fa fa-times-circle", "請輸入密碼", "red");
+        } else if (pwdVal.length >= 6) {
+            if (pwdVal.match(/\s/g)) {
+                setHint(pwd, pwdHint, "fa fa-times-circle", "請勿輸入空白", "red");
+            } else if (pwdVal.match(/[a-z]/i) && pwdVal.match(/[0-9]/g) && pwdVal.match(/[!@#$%^&*]/g)) {
+                setHint(pwd, pwdHint, "fa fa-check-circle", "", "green");
+            } else {
+                setHint(pwd, pwdHint, "fa fa-times-circle", "密碼格式錯誤", "red");
+            }
+        } else {
+            setHint(pwd, pwdHint, "fa fa-times-circle", "好小", "red");
+        }
+    }
+
+    function checkDate() {
+        let dateVal = date.value;
+        let dateHint = document.getElementById
+            ("idDateHint");
+        dateHint.innerHTML = "";
+        date.style.borderColor = "black";
+        if (dateVal == "") {
+            setHint(date, dateHint, "fa fa-times-circle", "請輸入日期", "red");
+        } else {
+            if (dateVal.match(/^(19|20)\d{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[0-1])$/g)) {
+                let dateObj = new Date(dateVal);
+                let dateYear = dateVal.split('/')[0];
+                let dateMonth = dateVal.split('/')[1].replace(/^0+/, '');
+                let dateDay = dateVal.split('/')[2].replace(/^0+/, '');
+                // console.log(dateYear + " vs. " + dateObj.getFullYear());
+                // console.log(dateMonth + " vs. " + (dateObj.getMonth() + 1));
+                // console.log(dateDay + " vs. " + dateObj.getDate());
+                if (dateObj.getFullYear() == dateYear && dateObj.getMonth() + 1 == dateMonth && dateDay == dateObj.getDate()) {
+                    setHint(date, dateHint, "fa fa-check-circle", "", "green");
+                } else {
+                    setHint(date, dateHint, "fa fa-times-circle", "日期不存在", "red");
+                }
+            } else {
+                setHint(date, dateHint, "fa fa-times-circle", "日期格式錯誤", "red");
+            }
+        }
+    }
+
+    function blink() {
+        // let newEye = eye.getAttribute('class') == "fa fa-eye" ? "fa fa-eye-slash" : "fa fa-eye";
+        // eye.setAttribute('class', newEye);
+        let newEye = eye.className == "fa fa-eye" ? "fa fa-eye-slash" : "fa fa-eye";
+        eye.className = newEye;
+        // if (pwd.type == "password") {
+        //     pwd.type = "text";
+        // } else {
+        //     pwd.type = 'password';
+        // }
+        let newType = pwd.getAttribute('type') == "password" ? "text" : "password";
+        pwd.setAttribute('type', newType);
+    }
+
+    function switchMode() {
+        let ltMode = document.getElementsByTagName('link')[2];
+        let dkMode = document.getElementsByTagName('link')[3];
+        if (ltMode.disabled == true) {
+            ltMode.disabled = false;
+            dkMode.disabled = true;
+            mode.className = "fa fa-moon-o";
+            mode.textContent = " Dark Mode"
+        } else {
+            ltMode.disabled = true;
+            dkMode.disabled = false;
+            mode.className = "fa fa-sun-o";
+            mode.textContent = " Light Mode"
+        }
+    }
+
+    name.addEventListener('blur', checkName);
+    pwd.addEventListener('blur', checkPwd);
+    date.addEventListener('blur', checkDate);
+    eye.addEventListener('click', blink);
+    mode.addEventListener('click', switchMode);
+
+</script>
+
+</html>
