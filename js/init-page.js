@@ -1,4 +1,4 @@
-const nav = `
+let nav = `
 <ul>
     <li><a href="HW01.html">HW01</a></li>
     <li><a href="HW02.html">HW02</a></li>
