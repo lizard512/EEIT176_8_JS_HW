@@ -7,27 +7,14 @@
     <title>HW1</title>
     <style>
         @import url(css/navbar.css);
-
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            overflow: hidden;
-            line-height: 1.45;
-        }
-
-        div {
-            background-color: wheat;
-            display: flex;
-            height: 100%;
-        }
+        @import url(css/main.css);
 
         td,
         table {
             background-color: gold;
             border: 3px solid black;
             border-collapse: collapse;
-            font-size: 1.25em;
+            font-size: 1em;
             margin: auto;
         }
 
@@ -39,36 +26,30 @@
             background-color: goldenrod;
         }
     </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let di = document.getElementById("di");
-            di.innerHTML += "<table id='tb'></table>";
-            let tb = document.getElementById("tb");
-            for (let i = 1; i <= 9; i++) {
-                tb.innerHTML += `<tr id="tr${i}"></tr>`;
-                let tr = document.getElementById(`tr${i}`);
-                for (let j = 2; j <= 9; j++) {
-                    tr.innerHTML += `<td id="td${j}">${j}×${i}=${i * j}</td>`;
-                }
-            }
-        })
-    </script>
+
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="HW01.html" class="current-page">HW01</a></li>
-            <li><a href="HW02.html">HW02</a></li>
-            <li><a href="#">HW03</a></li>
-            <li><a href="#">HW04</a></li>
-            <li><a href="#">HW05</a></li>
-            <li><a href="#">HWEX</a></li>
-        </ul>
+    <nav id="navbar">
     </nav>
-    <div id="di">
+    <main id="mn">
 
-    </div>
+    </main>
 </body>
+<script src="Js/init-page.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let mn = document.getElementById("mn");
+        mn.innerHTML += "<table id='tb'></table>";
+        let tb = document.getElementById("tb");
+        for (let i = 1; i <= 9; i++) {
+            tb.innerHTML += `<tr id="tr${i}"></tr>`;
+            let tr = document.getElementById(`tr${i}`);
+            for (let j = 2; j <= 9; j++) {
+                tr.innerHTML += `<td id="td${j}">${j}×${i}=${i * j}</td>`;
+            }
+        }
+    })
+</script>
 
 </html>

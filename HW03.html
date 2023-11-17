@@ -6,14 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<Style>
+    @import url(css/navbar.css);
+    @import url(css/main.css);
+
+    div {
+        background-color: gold;
+        border: 3px solid black;
+        font-size: 1.25em;
+        margin: auto;
+    }
+</Style>
 
 <body>
-    <img src="img/star.gif" class="star" id="star1">
-    <img src="img/star.gif" class="star" id="star2">
-    <img src="img/star.gif" class="star" id="star3">
-    <img src="img/star.gif" class="star" id="star4">
-    <img src="img/star.gif" class="star" id="star5">
+    <nav id="navbar">
+    </nav>
+    <main>
+        <div class="star-carnival">
+            <img src="img/emptyStar.gif" class="star" id="star1">
+            <img src="img/emptyStar.gif" class="star" id="star2">
+            <img src="img/emptyStar.gif" class="star" id="star3">
+            <img src="img/emptyStar.gif" class="star" id="star4">
+            <img src="img/emptyStar.gif" class="star" id="star5">
+        </div>
+    </main>
+
+
 </body>
+<script src="Js/init-page.js"></script>
 <script>
     let stars = document.getElementsByClassName('star');
     let clickStatus = [false, false, false, false, false];
@@ -21,25 +41,25 @@
     for (let i = 0; i < stars.length; i++) {
         stars[i].addEventListener('mouseover', function () {
             if (!clickStatus.some(status => status === true)) {
-                changeStar(i, 'img/fullstar.gif');
+                changeStar(i, 'img/fullStar.gif');
             }
         });
 
         stars[i].addEventListener('mouseout', function () {
             if (!clickStatus.some(status => status === true)) {
-                changeStar(i, 'img/star.gif');
+                changeStar(i, 'img/emptyStar.gif');
             }
         });
 
         stars[i].addEventListener('click', function () {
             clickStatus.fill(false);
             clickStatus[i] = true;
-            changeStar(i, 'img/fullstar.gif');
+            changeStar(i, 'img/fullStar.gif');
         });
 
         stars[i].addEventListener('dblclick', function () {
             clickStatus.fill(false);
-            changeStar(i, 'img/star.gif');
+            changeStar(i, 'img/emptyStar.gif');
         });
     }
 
@@ -48,7 +68,7 @@
             stars[i].src = src;
         }
         for (let i = index + 1; i < stars.length; i++) {
-            stars[i].src = 'img/star.gif';
+            stars[i].src = 'img/emptyStar.gif';
         }
     }
 </script>
