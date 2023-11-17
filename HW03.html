@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="img/star.gif" class="star" id="star1">
+    <img src="img/star.gif" class="star" id="star2">
+    <img src="img/star.gif" class="star" id="star3">
+    <img src="img/star.gif" class="star" id="star4">
+    <img src="img/star.gif" class="star" id="star5">
+</body>
+<script>
+    let stars = document.getElementsByClassName('star');
+    let clickStatus = [false, false, false, false, false];
+
+    for (let i = 0; i < stars.length; i++) {
+        stars[i].addEventListener('mouseover', function () {
+            if (!clickStatus.some(status => status === true)) {
+                changeStar(i, 'img/fullstar.gif');
+            }
+        });
+
+        stars[i].addEventListener('mouseout', function () {
+            if (!clickStatus.some(status => status === true)) {
+                changeStar(i, 'img/star.gif');
+            }
+        });
+
+        stars[i].addEventListener('click', function () {
+            clickStatus.fill(false);
+            clickStatus[i] = true;
+            changeStar(i, 'img/fullstar.gif');
+        });
+
+        stars[i].addEventListener('dblclick', function () {
+            clickStatus.fill(false);
+            changeStar(i, 'img/star.gif');
+        });
+    }
+
+    function changeStar(index, src) {
+        for (let i = 0; i <= index; i++) {
+            stars[i].src = src;
+        }
+        for (let i = index + 1; i < stars.length; i++) {
+            stars[i].src = 'img/star.gif';
+        }
+    }
+</script>
+
+</html>
