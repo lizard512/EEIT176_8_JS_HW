@@ -6,15 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HW04</title>
 </head>
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <Style>
     @import url(css/navbar.css);
     @import url(css/main.css);
 
-    div {
-        background-color: gold;
-        border: 3px solid black;
-        font-size: 1.25em;
+    #slider-img {
+        width: 100%;
+        height: auto;
+    }
+
+    #slider {
         margin: auto;
+        position: relative;
+        width: 70%;
+        height: auto;
+    }
+
+    #slider-index {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 10%;
+        text-align: center;
+        background-color: gray;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    #prev-btn,
+    #next-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    #prev-btn {
+        left: 10px;
+    }
+
+    #next-btn {
+        right: 10px;
     }
 </Style>
 
@@ -22,14 +61,59 @@
     <nav id="navbar">
     </nav>
     <main>
-
+        <div id="slider">
+            <a id="slider-link" href="#">
+                <img id="slider-img" src="" alt="slide image">
+            </a>
+            <div id="slider-index">1 / 6</div>
+            <button id="prev-btn"> &lt; </button>
+            <button id="next-btn"> &gt; </button>
+        </div>
     </main>
-
-
 </body>
 <script type="text/javascript" src="js/init-page.js"></script>
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var images = ['img/p1.jpg', 'img/p2.jpg', 'img/p3.jpg', 'img/p4.jpg', 'img/p5.jpg', 'img/p6.jpg'];
+        var links = ['http://example.com/1', 'http://example.com/2', 'http://example.com/3', 'http://example.com/4', 'http://example.com/5', 'http://example.com/6'];
+        var currentIndex = 0;
+        var sliderImg = document.getElementById('slider-img');
+        var sliderLink = document.getElementById('slider-link');
+        var sliderIndex = document.getElementById('slider-index');
+        var prevBtn = document.getElementById('prev-btn');
+        var nextBtn = document.getElementById('next-btn');
 
+        function updateSlide() {
+            sliderImg.src = images[currentIndex];
+            sliderLink.href = links[currentIndex];
+            sliderIndex.textContent = (currentIndex + 1) + ' / ' + images.length;
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateSlide();
+        }
+
+        var slideInterval = setInterval(nextSlide, 3000);
+
+        sliderImg.addEventListener('mouseover', function () {
+            clearInterval(slideInterval);
+        });
+
+        sliderImg.addEventListener('mouseout', function () {
+            slideInterval = setInterval(nextSlide, 3000);
+        });
+
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        updateSlide();
+    });
 </script>
 
 </html>
