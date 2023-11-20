@@ -1,17 +1,3 @@
-html,
-body {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-    line-height: 1.45;
-}
-
-main {
-    display: grid;
-    height: 100%;
-    place-items: center;
-}
-
 fieldset {
     padding: 2em;
 }

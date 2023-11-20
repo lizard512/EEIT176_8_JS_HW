@@ -1,4 +1,4 @@
-html,
+/* html,
 body {
     height: 100%;
     margin: 0;
@@ -10,4 +10,20 @@ main {
     background-color: wheat;
     display: flex;
     height: 100%;
+} */
+
+html {
+    line-height: 1.45;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+}
+
+main {
+    background-color: wheat;
+    display: grid;
+    height: 100dvh;
+    place-items: center;
 }
