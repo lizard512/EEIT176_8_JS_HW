@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW05</title>
+</head>
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+<Style>
+    @import url(css/navbar.css);
+    @import url(css/main.css);
+
+    select {
+        display: inline-block;
+    }
+
+    .selected {
+        background-color: #ff0;
+    }
+</Style>
+
+<body>
+    <nav id="navbar">
+    </nav>
+    <main>
+        <div>
+            <select id="year"></select>
+            <select id="month"></select>
+            <select id="day"></select>
+        </div>
+        <button id="prev-month">上一個月</button>
+        <button id="next-month">下一個月</button>
+        <table id="calendar">
+            <thead>
+                <tr>
+                    <th>日</th>
+                    <th>一</th>
+                    <th>二</th>
+                    <th>三</th>
+                    <th>四</th>
+                    <th>五</th>
+                    <th>六</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+</body>
+<script type="text/javascript" src="js/init-page.js"></script>
+<script>
+    window.onload = function () {
+        // 抓取元件
+        let yearSelect = document.getElementById('year');
+        let monthSelect = document.getElementById('month');
+        let daySelect = document.getElementById('day');
+        let calendarBody = document.getElementById('calendar').tBodies[0];
+
+        // 獲取當天日期
+        let today = new Date();
+        let currentYear = today.getFullYear();
+        let currentMonth = today.getMonth() + 1; // 從零開始的Java月份...
+        let currentDay = today.getDate();
+
+        // 生成年份和月份選項
+        for (let i = 1900; i <= 2100; i++) {
+            let option = document.createElement('option');
+            option.value = i;
+            option.textContent = i;
+            yearSelect.appendChild(option);
+        }
+        for (let i = 1; i <= 12; i++) {
+            let option = document.createElement('option');
+            option.value = i;
+            option.textContent = i;
+            monthSelect.appendChild(option);
+        }
+
+        // 方法：根據年份、月份選擇器，更新日期選項
+        function updateDayOptions() {
+            let year = yearSelect.value;
+            let month = monthSelect.value;
+            let daysInMonth = new Date(year, month, 0).getDate();
+
+            daySelect.innerHTML = '';
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                let option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                daySelect.appendChild(option);
+            }
+        }
+
+        // 初見殺
+        updateDayOptions();
+
+        // 設定預設值為當天
+        yearSelect.value = currentYear;
+        monthSelect.value = currentMonth;
+        daySelect.value = currentDay;
+
+        // 方法：生成日曆
+        function generateCalendar() {
+            let year = yearSelect.value;
+            let month = monthSelect.value;
+            let firstDay = new Date(year, month - 1, 1).getDay();
+            let daysInMonth = new Date(year, month, 0).getDate();
+            let selectedDay = daySelect.value;
+
+            calendarBody.innerHTML = '';
+
+            let row, cell;
+            for (let i = 0; i < firstDay + daysInMonth; i++) {
+                if (i % 7 === 0) {
+                    row = calendarBody.insertRow();
+                }
+                cell = row.insertCell();
+                if (i >= firstDay) {
+                    cell.textContent = i - firstDay + 1;
+
+                    // 點擊日曆的相關事件
+                    cell.addEventListener('click', function () {
+                        let selected = document.querySelector('.selected');
+                        if (selected) {
+                            selected.classList.remove('selected');
+                        }
+                        this.classList.add('selected');
+                        daySelect.value = this.textContent;
+                    });
+
+                    // 日期選擇器的事件
+                    if (cell.textContent == selectedDay) {
+                        cell.classList.add('selected');
+                    }
+                }
+            }
+        }
+
+        // 監聽日期選擇器
+        yearSelect.addEventListener('change', generateCalendar);
+        monthSelect.addEventListener('change', generateCalendar);
+        daySelect.addEventListener('change', generateCalendar);
+
+        // 生成日曆
+        generateCalendar();
+
+        // 切換月份按鈕
+        let prevMonthButton = document.getElementById('prev-month');
+        let nextMonthButton = document.getElementById('next-month');
+
+        prevMonthButton.addEventListener('click', function () {
+            let currentMonth = parseInt(monthSelect.value);
+            if (currentMonth === 1) {
+                monthSelect.value = 12;
+                yearSelect.value = parseInt(yearSelect.value) - 1;
+            } else {
+                monthSelect.value = currentMonth - 1;
+            }
+            generateCalendar();
+        });
+
+        nextMonthButton.addEventListener('click', function () {
+            let currentMonth = parseInt(monthSelect.value);
+            if (currentMonth === 12) {
+                monthSelect.value = 1;
+                yearSelect.value = parseInt(yearSelect.value) + 1;
+            } else {
+                monthSelect.value = currentMonth + 1;
+            }
+            generateCalendar();
+        });
+
+    };
+</script>
+
+</html>
