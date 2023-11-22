@@ -22,7 +22,7 @@ body {
 }
 
 main {
-    background-color: wheat;
+    background-color: lightslategray;
     display: grid;
     height: 100dvh;
     place-items: center;

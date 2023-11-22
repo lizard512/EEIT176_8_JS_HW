@@ -11,19 +11,32 @@
     @import url(css/navbar.css);
     @import url(css/main.css);
 
-    select {}
+    thead,
+    tbody {
+        cursor: pointer;
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    thead {
+        background-color: lightblue;
+    }
+
+    tbody {
+        background-color: lightcyan;
+    }
 
     .highlighted {
         background-color: yellow;
     }
 
-    #controls {
+    #selects {
         position: fixed;
-        top: 60px;
+        top: 100px;
     }
 
     #table-container {
-        max-height: 400px;
+        max-height: 70dvh;
         /* Adjust this value to fit your needs */
         overflow: auto;
     }
@@ -33,7 +46,7 @@
     <nav id="navbar">
     </nav>
     <main>
-        <div id="controls">
+        <div id="selects">
             <select id="city-select">請選擇縣市
             </select>
             <select id="district-select">請選擇行政區

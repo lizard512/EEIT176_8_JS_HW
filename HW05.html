@@ -11,12 +11,41 @@
     @import url(css/navbar.css);
     @import url(css/main.css);
 
+    thead,
+    tbody {
+        cursor: pointer;
+    }
+
+    thead {
+        background-color: lightblue;
+    }
+
+    tbody {
+        background-color: lightcyan;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        font-size: 2em;
+        text-align: center;
+    }
+
     select {
         display: inline-block;
     }
 
+    p {
+        color: white;
+    }
+
     .selected {
         background-color: #ff0;
+    }
+
+    #selects {
+        position: fixed;
+        top: 100px;
     }
 </Style>
 
@@ -24,13 +53,13 @@
     <nav id="navbar">
     </nav>
     <main>
-        <div>
+        <div id="selects">
+            <button id="prev-month">上一個月</button>
             <select id="year"></select>
             <select id="month"></select>
             <select id="day"></select>
+            <button id="next-month">下一個月</button>
         </div>
-        <button id="prev-month">上一個月</button>
-        <button id="next-month">下一個月</button>
         <table id="calendar">
             <thead>
                 <tr>
