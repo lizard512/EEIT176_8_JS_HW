@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HWEX</title>
+</head>
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+<Style>
+    @import url(css/navbar.css);
+    @import url(css/main.css);
+
+    select {}
+
+    .highlighted {
+        background-color: yellow;
+    }
+
+    #controls {
+        position: fixed;
+        top: 60px;
+    }
+
+    #table-container {
+        max-height: 400px;
+        /* Adjust this value to fit your needs */
+        overflow: auto;
+    }
+</Style>
+
+<body>
+    <nav id="navbar">
+    </nav>
+    <main>
+        <div id="controls">
+            <select id="city-select">請選擇縣市
+            </select>
+            <select id="district-select">請選擇行政區
+            </select>
+        </div>
+
+        <div id="table-container">
+            <table id="district-table">
+                <thead>
+                    <tr>
+                        <th>郵遞區號</th>
+                        <th>行政區名稱</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- District data will be generated here -->
+                </tbody>
+            </table>
+        </div>
+</body>
+<script type="text/javascript" src="js/taiwan_districts.js"></script>
+<script type="text/javascript" src="js/init-page.js"></script>
+<script>
+
+    window.onload = function () {
+        let citySelect = document.getElementById('city-select');
+        let districtSelect = document.getElementById('district-select');
+        let districtTable = document.getElementById('district-table').tBodies[0];
+
+        // Generate default city option
+        let defaultCityOption = document.createElement('option');
+        defaultCityOption.value = '';
+        defaultCityOption.textContent = '請選擇縣市';
+        defaultCityOption.selected = true;
+        citySelect.appendChild(defaultCityOption);
+
+        // Generate city options
+        for (let city of data) {
+            let option = document.createElement('option');
+            option.value = city.name;
+            option.textContent = city.name;
+            citySelect.appendChild(option);
+        }
+
+        // Update district options and table when city is selected
+        citySelect.addEventListener('change', function () {
+            let selectedCity = this.value;
+
+            // Clear previous options and table data
+            districtSelect.innerHTML = '';
+            districtTable.innerHTML = '';
+
+            // Generate default district option
+            let defaultDistrictOption = document.createElement('option');
+            defaultDistrictOption.value = '';
+            defaultDistrictOption.textContent = '請選擇行政區';
+            defaultDistrictOption.selected = true;
+            districtSelect.appendChild(defaultDistrictOption);
+
+            // Generate new options and table data
+            for (let city of data) {
+                if (city.name === selectedCity) {
+                    for (let district of city.districts) {
+                        let option = document.createElement('option');
+                        option.value = district.name;
+                        option.textContent = district.name;
+                        districtSelect.appendChild(option);
+
+                        let row = districtTable.insertRow();
+                        row.insertCell().textContent = district.zip;
+                        row.insertCell().textContent = district.name;
+                    }
+                    break;
+                }
+            }
+        });
+
+        // Highlight selected district when district is selected
+        districtSelect.addEventListener('change', function () {
+            let selectedDistrict = this.value;
+
+            // Remove previous highlight
+            let highlighted = districtTable.querySelector('.highlighted');
+            if (highlighted) {
+                highlighted.classList.remove('highlighted');
+            }
+
+            // Add new highlight
+            for (let row of districtTable.rows) {
+                if (row.cells[1].textContent === selectedDistrict) {
+                    row.classList.add('highlighted');
+                    break;
+                }
+            }
+        });
+    };
+</script>
+
+</html>
