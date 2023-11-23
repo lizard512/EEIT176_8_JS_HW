@@ -1,5 +1,6 @@
 let nav = `
 <ul>
+    <li><a href="index.html"><span class ="fa fa-home"></span> HOME</a></li>
     <li><a href="HW01.html"><span class ="fa fa-calculator"></span> HW01</a></li>
     <li><a href="HW02.html"><span class ="fa fa-file-text"></span> HW02</a></li>
     <li><a href="HW03.html"><span class ="fa fa-star-half-o"> HW03</a></li>

@@ -5,16 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EEIT176 8 林立則</title>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <style>
         @import url(css/navbar.css);
         @import url(css/main.css);
 
-        div {
-            background-color: gold;
-            border: 3px solid black;
-            font-size: 1.25em;
-            margin: auto;
-            padding: 2em;
+        main ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0;
+            list-style: none;
+            width: 70%;
+        }
+
+        main li {
+            background-color: aliceblue;
+            flex: 0 1 23%;
+            margin: 1em;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 2);
+            text-align: center;
+        }
+
+        main li a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            padding: 1em;
+        }
+
+        main li img {
+            width: 100%;
+            height: auto;
+        }
+
+        main li:hover {
+            box-shadow: 0 0 10px rgba(253, 253, 253, 2);
         }
     </style>
 </head>
@@ -23,7 +50,45 @@
     <nav id="navbar">
     </nav>
     <main>
-        <div>這裡是EEIT176 8 林立則的Java Script作業首頁</div>
+        <h3>這裡是EEIT175 8 林立則的Java Script作業首頁</h3>
+        <ul>
+            <li>
+                <a href="HW01.html">
+                    <img src="img/HW01_thumbnail.png" alt="HW01 預覽">
+                    HW01 九九乘法表
+                </a>
+            </li>
+            <li>
+                <a href="HW02.html">
+                    <img src="img/HW02_thumbnail.png" alt="HW02 預覽">
+                    HW02 表單驗證
+                </a>
+            </li>
+            <li>
+                <a href="HW03.html">
+                    <img src="img/HW03_thumbnail.png" alt="HW03 預覽">
+                    HW03 五星好評
+                </a>
+            </li>
+            <li>
+                <a href="HW04.html">
+                    <img src="img/HW04_thumbnail.png" alt="HW04 預覽">
+                    HW04 照片輪播
+                </a>
+            </li>
+            <li>
+                <a href="HW05.html">
+                    <img src="img/HW05_thumbnail.png" alt="HW05 預覽">
+                    HW05 西元年月曆
+                </a>
+            </li>
+            <li>
+                <a href="HWEX.html">
+                    <img src="img/HWEX_thumbnail.png" alt="HWEX 預覽">
+                    HWEX 郵遞區號
+                </a>
+            </li>
+        </ul>
     </main>
 </body>
 <script type="text/javascript" src="js/init-page.js"></script>

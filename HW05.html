@@ -33,6 +33,7 @@
 
     select {
         display: inline-block;
+        font-size: 1em;
     }
 
     p {
@@ -45,7 +46,7 @@
 
     #selects {
         position: fixed;
-        top: 100px;
+        top: 10dvh;
     }
 </Style>
 
@@ -105,7 +106,7 @@
             monthSelect.appendChild(option);
         }
 
-        // 方法：根據年份、月份選擇器，更新日期選項
+        // 根據年份、月份選擇器，更新日期選項
         function updateDayOptions() {
             let year = yearSelect.value;
             let month = monthSelect.value;
@@ -129,7 +130,7 @@
         monthSelect.value = currentMonth;
         daySelect.value = currentDay;
 
-        // 方法：生成日曆
+        // 生成日曆
         function generateCalendar() {
             let year = yearSelect.value;
             let month = monthSelect.value;

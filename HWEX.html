@@ -26,18 +26,21 @@
         background-color: lightcyan;
     }
 
+    select {
+        font-size: 1em;
+    }
+
     .highlighted {
         background-color: yellow;
     }
 
     #selects {
         position: fixed;
-        top: 100px;
+        top: 10dvh;
     }
 
     #table-container {
         max-height: 70dvh;
-        /* Adjust this value to fit your needs */
         overflow: auto;
     }
 </Style>
@@ -62,7 +65,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- District data will be generated here -->
                 </tbody>
             </table>
         </div>
@@ -76,14 +78,14 @@
         let districtSelect = document.getElementById('district-select');
         let districtTable = document.getElementById('district-table').tBodies[0];
 
-        // Generate default city option
+        // 產生預設的縣市選項
         let defaultCityOption = document.createElement('option');
         defaultCityOption.value = '';
         defaultCityOption.textContent = '請選擇縣市';
         defaultCityOption.selected = true;
         citySelect.appendChild(defaultCityOption);
 
-        // Generate city options
+        // 產生縣市選項
         for (let city of data) {
             let option = document.createElement('option');
             option.value = city.name;
@@ -91,22 +93,22 @@
             citySelect.appendChild(option);
         }
 
-        // Update district options and table when city is selected
+        // 選擇縣市時，更新行政區選項和表格
         citySelect.addEventListener('change', function () {
             let selectedCity = this.value;
 
-            // Clear previous options and table data
+            // 清除原先的選項和表格資料
             districtSelect.innerHTML = '';
             districtTable.innerHTML = '';
 
-            // Generate default district option
+            // 產生預設的行政區選項
             let defaultDistrictOption = document.createElement('option');
             defaultDistrictOption.value = '';
             defaultDistrictOption.textContent = '請選擇行政區';
             defaultDistrictOption.selected = true;
             districtSelect.appendChild(defaultDistrictOption);
 
-            // Generate new options and table data
+            // 產生新的行政區選項和表格資料
             for (let city of data) {
                 if (city.name === selectedCity) {
                     for (let district of city.districts) {
@@ -124,17 +126,17 @@
             }
         });
 
-        // Highlight selected district when district is selected
+        // 選擇行政區時，醒目標示選擇的行政區
         districtSelect.addEventListener('change', function () {
             let selectedDistrict = this.value;
 
-            // Remove previous highlight
+            // 移除原有的醒目標示效果
             let highlighted = districtTable.querySelector('.highlighted');
             if (highlighted) {
                 highlighted.classList.remove('highlighted');
             }
 
-            // Add new highlight
+            // 增加新的醒目標示效果
             for (let row of districtTable.rows) {
                 if (row.cells[1].textContent === selectedDistrict) {
                     row.classList.add('highlighted');
