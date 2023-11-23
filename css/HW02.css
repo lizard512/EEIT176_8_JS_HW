@@ -19,6 +19,12 @@ p {
     margin: 0.75rem 0 0;
 }
 
+div>p {
+    text-align: center;
+    color: white;
+    margin-top: 5px;
+}
+
 #idEye {
     margin-left: -32px;
     background-color: transparent;

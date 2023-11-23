@@ -38,6 +38,8 @@
 
     p {
         color: white;
+        text-align: center;
+        margin-bottom: 5px;
     }
 
     .selected {
@@ -55,26 +57,30 @@
     </nav>
     <main>
         <div id="selects">
-            <button id="prev-month">上一個月</button>
+            <button id="prev-month">
+                &lt; </button>
             <select id="year"></select>
             <select id="month"></select>
             <select id="day"></select>
-            <button id="next-month">下一個月</button>
+            <button id="next-month"> &gt; </button>
         </div>
-        <table id="calendar">
-            <thead>
-                <tr>
-                    <th>日</th>
-                    <th>一</th>
-                    <th>二</th>
-                    <th>三</th>
-                    <th>四</th>
-                    <th>五</th>
-                    <th>六</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div>
+            <table id="calendar">
+                <p>※ 點擊日曆會變更實際選擇的日期</p>
+                <thead>
+                    <tr>
+                        <th>日</th>
+                        <th>一</th>
+                        <th>二</th>
+                        <th>三</th>
+                        <th>四</th>
+                        <th>五</th>
+                        <th>六</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </main>
 </body>
 <script type="text/javascript" src="js/init-page.js"></script>

@@ -7,10 +7,6 @@ input {
     border: 2px solid black;
 }
 
-p {
-    color: grey;
-}
-
 #idMode {
     color: white;
     background-color: black;

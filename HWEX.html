@@ -30,6 +30,12 @@
         font-size: 1em;
     }
 
+    p {
+        text-align: center;
+        color: white;
+        margin-bottom: 5px;
+    }
+
     .highlighted {
         background-color: yellow;
     }
@@ -57,6 +63,7 @@
         </div>
 
         <div id="table-container">
+            <p>※ 選擇的行政區會有醒目標示</p>
             <table id="district-table">
                 <thead>
                     <tr>
@@ -78,12 +85,19 @@
         let districtSelect = document.getElementById('district-select');
         let districtTable = document.getElementById('district-table').tBodies[0];
 
-        // 產生預設的縣市選項
+        // 產生預設的縣市填入內容
         let defaultCityOption = document.createElement('option');
         defaultCityOption.value = '';
         defaultCityOption.textContent = '請選擇縣市';
         defaultCityOption.selected = true;
         citySelect.appendChild(defaultCityOption);
+
+        // 產生預設的行政區填入內容
+        let defaultDistrictOption = document.createElement('option');
+        defaultDistrictOption.value = '';
+        defaultDistrictOption.textContent = '請選擇行政區';
+        defaultDistrictOption.selected = true;
+        districtSelect.appendChild(defaultDistrictOption);
 
         // 產生縣市選項
         for (let city of data) {
@@ -100,13 +114,6 @@
             // 清除原先的選項和表格資料
             districtSelect.innerHTML = '';
             districtTable.innerHTML = '';
-
-            // 產生預設的行政區選項
-            let defaultDistrictOption = document.createElement('option');
-            defaultDistrictOption.value = '';
-            defaultDistrictOption.textContent = '請選擇行政區';
-            defaultDistrictOption.selected = true;
-            districtSelect.appendChild(defaultDistrictOption);
 
             // 產生新的行政區選項和表格資料
             for (let city of data) {
